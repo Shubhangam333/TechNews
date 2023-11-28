@@ -28,8 +28,9 @@ const Wrapper = styled.nav`
     margin-top: 0.3rem;
   }
 
-  .main button i {
-    font-size: 1.4rem;
+  .main .menu-btn,
+  .close-btn {
+    font-size: 2rem;
   }
 
   .main .logo {

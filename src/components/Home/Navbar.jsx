@@ -1,11 +1,25 @@
 import Wrapper from "../../assets/wrappers/Navbar";
+import { IoClose } from "react-icons/io5";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setMegaMenuActive,
+  setSearchActive,
+} from "../../features/navbar/navbarSlice";
 
-const Navbar = ({ setSearchActive, searchActive }) => {
+const Navbar = () => {
+  const { megaMenuActive } = useSelector((state) => state.navbar);
+  const dispatch = useDispatch();
+
+  const handleActive = () => {
+    dispatch(setMegaMenuActive());
+  };
   return (
     <Wrapper>
       <div className="main">
-        <button>
-          <i className="fa-solid fa-bars"></i>
+        <button onClick={() => handleActive()}>
+          {!megaMenuActive && <RxHamburgerMenu className="menu-btn" />}
+          {megaMenuActive && <IoClose className="close-btn" />}
         </button>
         <h1 className="logo">TechNews</h1>
       </div>
@@ -36,7 +50,7 @@ const Navbar = ({ setSearchActive, searchActive }) => {
 
         <button
           className="search-icon"
-          onClick={() => setSearchActive(!searchActive)}
+          onClick={() => dispatch(setSearchActive())}
         >
           <i className="fa-solid fa-magnifying-glass"></i>
         </button>
