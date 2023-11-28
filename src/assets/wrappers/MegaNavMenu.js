@@ -5,10 +5,10 @@ const Wrapper = styled.div`
   left: 37%;
   top: 0;
   border-left: 2px solid var(--divider-color);
-  height: 60vh;
   padding-left: 2rem;
   right: 5rem;
   z-index: 30000;
+  height: 100%;
 
   h3 {
     margin-bottom: 2rem;
@@ -36,6 +36,22 @@ const Wrapper = styled.div`
   .menu-container ul li a:hover {
     text-decoration: underline;
     color: var(--link-color);
+  }
+
+  @media (max-width: 720px) {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    border-bottom: 2px solid var(--divider-color);
+    border-left: none;
+    padding-left: 0rem;
+    top: 3rem;
+    bottom: 4rem;
+
+    .menu-container {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 `;
 

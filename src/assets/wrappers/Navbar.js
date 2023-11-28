@@ -29,7 +29,7 @@ const Wrapper = styled.nav`
   }
 
   .main .menu-btn,
-  .close-btn {
+  .main .close-btn {
     font-size: 2rem;
   }
 
@@ -104,6 +104,40 @@ const Wrapper = styled.nav`
     font-size: 1.2rem;
     background: none;
     color: var(--icon-color);
+  }
+
+  @media (max-width: 980px) {
+    padding: 0rem 1rem;
+    .navLinks {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    height: 3.5rem;
+    .btn-list .search-icon {
+      display: none;
+    }
+    .main .logo {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .btn-list .auth-container .icon-container img {
+      width: 0.9rem;
+      height: 0.9rem;
+    }
+    .btn-list .auth-container .icon-container {
+      width: 2rem;
+      height: 1.2rem;
+    }
+    .btn-list .auth-btn {
+      font-size: 0.7rem;
+      padding: 0.1rem;
+    }
+    .main .menu-btn,
+    .main .close-btn {
+      font-size: 1rem;
+    }
   }
 `;
 export default Wrapper;

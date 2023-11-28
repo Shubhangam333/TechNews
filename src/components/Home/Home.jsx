@@ -10,7 +10,7 @@ const Home = () => {
       <Navbar />
       <SearchBar />
       <MegaNav />
-      <TopStories />
+      {/* <TopStories /> */}
     </>
   );
 };

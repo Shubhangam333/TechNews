@@ -1,5 +1,5 @@
 import Wrapper from "../../assets/wrappers/MegaNav";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import MegaNavMenu from "./MegaNavMenu";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -13,39 +13,30 @@ const MegaNav = () => {
         <Wrapper>
           <ul className="megaList">
             <li className="listItem">
-              <button onClick={() => setMenuId(true)}>
-                Computing <IoIosArrowForward className="arrow-icon" />
+              <button onClick={() => setMenuId(!MenuId)} className="arrow-icon">
+                Computing <IoIosArrowForward className="icon" />
+              </button>
+              <button
+                onClick={() => setMenuId(!MenuId)}
+                className="down-arrow-icon"
+              >
+                Computing
+                <IoIosArrowDown className="icon" />
               </button>
               <MegaNavMenu MenuId={MenuId} />
             </li>
             <li className="listItem">
-              <button onClick={() => setMenuId(true)}>
-                Mobile <IoIosArrowForward className="arrow-icon" />
+              <button onClick={() => setMenuId(!MenuId)} className="arrow-icon">
+                Mobile <IoIosArrowForward className="icon" />
               </button>
-              {/* <MegaNavMenu MenuId={MenuId} /> */}
-            </li>
-            <li className="listItem">
-              <button>
-                Gaming <IoIosArrowForward className="arrow-icon" />
+              <button
+                onClick={() => setMenuId(!MenuId)}
+                className="down-arrow-icon"
+              >
+                Mobile
+                <IoIosArrowDown className="icon" />
+                {/* <MegaNavMenu MenuId={MenuId} /> */}
               </button>
-            </li>
-            <li className="listItem">
-              <button>
-                Entertainment <IoIosArrowForward className="arrow-icon" />
-              </button>
-              {/* <MegaNavMenu /> */}
-            </li>
-            <li className="listItem">
-              <button>
-                Audio/Video <IoIosArrowForward className="arrow-icon" />
-              </button>
-              {/* <MegaNavMenu /> */}
-            </li>
-            <li className="listItem">
-              <button>
-                SmartHome <IoIosArrowForward className="arrow-icon" />
-              </button>
-              {/* <MegaNavMenu /> */}
             </li>
           </ul>
         </Wrapper>
