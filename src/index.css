@@ -8,8 +8,16 @@
   text-decoration: none;
 }
 
+button {
+  background: none;
+}
+
 body {
   overflow-x: hidden;
+}
+
+ul {
+  list-style-type: none;
 }
 
 button {

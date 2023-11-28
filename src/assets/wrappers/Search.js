@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  margin-top: 5.5rem;
   background-color: var(--nav-background-color);
   border-top: 0.1rem solid var(--aside-divider-color);
   height: 6.5rem;
@@ -8,7 +9,9 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0.5rem 0rem;
-  position: relative;
+  position: fixed;
+  left: 0;
+  right: 0;
 
   .search-bar {
     background: var(--search-bar-color);

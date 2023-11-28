@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux";
 import Wrapper from "../../assets/wrappers/Search";
 
-const SearchBar = ({ searchActive, setSearchActive }) => {
+const SearchBar = () => {
+  const { megaMenuActive, searchActive } = useSelector((state) => state.navbar);
   return (
     <>
       {searchActive && (

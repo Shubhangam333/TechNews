@@ -5,14 +5,10 @@ import TopStories from "./TopStories";
 import MegaNav from "./MegaNav";
 
 const Home = () => {
-  const [searchActive, setSearchActive] = useState(false);
   return (
     <>
-      <Navbar setSearchActive={setSearchActive} searchActive={searchActive} />
-      <SearchBar
-        searchActive={searchActive}
-        setSearchActive={setSearchActive}
-      />
+      <Navbar />
+      <SearchBar />
       <MegaNav />
       <TopStories />
     </>
