@@ -90,3 +90,10 @@ export const login = async (req, res, next) => {
 
   sendToken(user, res);
 };
+
+export const checkStatus = async (req, res, next) => {
+  if (!req.user) {
+    throw new UnauthorizedError("User is not authorized");
+  }
+  res.status(StatusCodes.OK).json({ msg: "true" });
+};

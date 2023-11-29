@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const { megaMenuActive } = useSelector((state) => state.navbar);
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const handleActive = () => {
@@ -50,10 +51,22 @@ const Navbar = () => {
           <span className="">Sign In</span>
           <IoLogoGoogle className="icon" />
         </button> */}
-
-        <button className="icon-container" onClick={() => navigate("/signup")}>
-          <span className="auth-btn">Sign In</span>
-        </button>
+        {!isAuthenticated && (
+          <button
+            className="icon-container"
+            onClick={() => navigate("/signup")}
+          >
+            <span className="auth-btn">Sign In</span>
+          </button>
+        )}
+        {isAuthenticated && (
+          <button className="icon-container">
+            <span className="auth-btn user-info">
+              <img src={user?.avatar?.url} alt="" />
+              {user?.name}
+            </span>
+          </button>
+        )}
 
         <button
           className="search-icon"

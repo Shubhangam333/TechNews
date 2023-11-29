@@ -1,4 +1,4 @@
-import { BallTriangle, Circles } from "react-loader-spinner";
+import { BallTriangle } from "react-loader-spinner";
 import "./loader.css";
 
 const Loader = () => {

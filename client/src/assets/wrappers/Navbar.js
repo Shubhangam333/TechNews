@@ -98,6 +98,14 @@ const Wrapper = styled.nav`
     transition: all 0.3s linear;
   }
 
+  .btn-list .auth-btn.user-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem 0.1rem;
+    border-radius: 0rem;
+  }
+
   .btn-list .auth-btn.google-auth {
     display: flex;
     align-items: center;
