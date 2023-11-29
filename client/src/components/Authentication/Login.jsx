@@ -3,23 +3,30 @@ import Wrapper from "../../assets/wrappers/Register";
 import { useLoginMutation } from "../../features/auth/authapi";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
+import { useDispatch } from "react-redux";
+import { setAuthenticated, setUser } from "../../features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginUser, { isLoading }] = useLoginMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const res = await loginUser({ email, password }).unwrap();
-      console.log(res);
 
       if (res) {
         setEmail("");
         setPassword("");
         toast.success(res.msg);
+        dispatch(setAuthenticated(true));
+        dispatch(setUser(res.user));
+        navigate("/");
       }
     } catch (error) {
       toast.error(error?.data?.msg);

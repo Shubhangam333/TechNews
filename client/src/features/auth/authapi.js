@@ -30,6 +30,12 @@ export const authapi = createApi({
         method: "GET",
       }),
     }),
+    checkAuthStatus: builder.query({
+      query: () => ({
+        url: "/check-status",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -38,4 +44,5 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useEmailVerificationQuery,
+  useCheckAuthStatusQuery,
 } = authapi;
