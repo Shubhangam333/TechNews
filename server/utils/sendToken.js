@@ -13,6 +13,5 @@ export const sendToken = (user, res) => {
 
   res.status(StatusCodes.OK).cookie("token", access_token, options).json({
     success: true,
-    user,
   });
 };

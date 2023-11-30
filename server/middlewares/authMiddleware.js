@@ -1,4 +1,9 @@
-import { NotFoundError, UnauthorizedError } from "../errors/customErrors.js";
+import { StatusCodes } from "http-status-codes";
+import {
+  NotFoundError,
+  UnauthenticatedError,
+  UnauthorizedError,
+} from "../errors/customErrors.js";
 import { User } from "../models/user.js";
 import jwt from "jsonwebtoken";
 
@@ -6,15 +11,29 @@ export const isAuthenticated = async (req, res, next) => {
   const token = req.cookies.token;
   if (!token) throw new UnauthorizedError("Token does not exist");
 
-  const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+  let id;
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error, decoded) => {
+    if (error) {
+      const options = {
+        expires: new Date(Date.now()),
+        httpOnly: true,
+      };
+      res.status(StatusCodes.FORBIDDEN).cookie("token", null, options).json({
+        msg: "Token not valid, Logged out successfully",
+      });
+    } else {
+      id = decoded.id;
+    }
+  });
 
-  if (!decoded.id) throw new UnauthorizedError("Token expired");
+  if (!id) {
+    throw new UnauthenticatedError("Token not valid");
+  }
 
-  const user = await User.findOne({ _id: decoded.id });
+  const user = await User.findOne({ _id: id });
   if (!user) {
     throw new NotFoundError("User does not exist in the system");
   }
-
   req.user = user;
   next();
 };

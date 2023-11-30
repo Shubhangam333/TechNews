@@ -4,7 +4,7 @@ import { useLoginMutation } from "../../features/auth/authapi";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
 import { useDispatch } from "react-redux";
-import { setAuthenticated, setUser } from "../../features/auth/authSlice";
+import { setAuthenticated } from "../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -25,7 +25,6 @@ const Login = () => {
         setPassword("");
         toast.success(res.msg);
         dispatch(setAuthenticated(true));
-        dispatch(setUser(res.user));
         navigate("/");
       }
     } catch (error) {

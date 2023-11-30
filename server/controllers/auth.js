@@ -91,6 +91,25 @@ export const login = async (req, res, next) => {
   sendToken(user, res);
 };
 
+export const profile = async (req, res, next) => {
+  const user = await User.findOne(req.user._id);
+  if (!user) {
+    throw new BadRequestError("Something went wrong.Please try again later");
+  }
+
+  res.status(StatusCodes.OK).json({ user });
+};
+
+export const logout = async (req, res, next) => {
+  const options = {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  };
+  res.status(StatusCodes.OK).cookie("token", null, options).json({
+    msg: "Logged out successfully",
+  });
+};
+
 export const checkStatus = async (req, res, next) => {
   if (!req.user) {
     throw new UnauthorizedError("User is not authorized");

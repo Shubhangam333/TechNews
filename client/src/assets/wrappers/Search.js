@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  margin-top: 5.5rem;
   background-color: var(--nav-background-color);
   border-top: 0.1rem solid var(--aside-divider-color);
   height: 6.5rem;

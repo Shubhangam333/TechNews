@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
       <Navbar />
       <SearchBar />
       <MegaNav />
-      {children}
+      <main className="main-container">{children}</main>
     </>
   );
 };
