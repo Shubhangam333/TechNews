@@ -64,3 +64,26 @@ i {
 .main-container {
   margin: 5.5rem 1rem 0rem 1rem;
 }
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: transparent;
+  border-radius: 50%;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--icon-color);
+  height: 20px;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: white;
+}
