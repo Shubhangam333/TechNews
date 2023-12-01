@@ -4,17 +4,13 @@ import Signup from "./pages/Signup";
 import SignIn from "./pages/SignIn";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import {
-  useCheckAuthStatusQuery,
-  useProfileMutation,
-} from "./features/auth/authapi";
 import { setAuthenticated, setUser } from "./features/auth/authSlice";
 import Error from "./pages/Error";
 import PrivateRoute from "./Routes/PrivateRoute";
 import ProfilePage from "./pages/ProfilePage";
+import { useProfileMutation } from "./features/profile/profileapi";
 
 function App() {
-  const { data, error } = useCheckAuthStatusQuery();
   const [getUserInfo] = useProfileMutation();
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -24,31 +20,18 @@ function App() {
       if (isAuthenticated) {
         try {
           const res = await getUserInfo().unwrap();
-          if (res) {
+          if (res.user) {
             dispatch(setUser(res.user));
-            dispatch(setAuthenticated(true));
-            JSON.stringify(localStorage.setItem("isAuth", true));
           }
         } catch (error) {
           console.log(error);
           dispatch(setAuthenticated(false));
-          JSON.stringify(localStorage.setItem("isAuth", false));
           localStorage.removeItem("user");
         }
       }
     };
     fetchInfo();
   }, [isAuthenticated, dispatch, getUserInfo]);
-  useEffect(() => {
-    if (data) {
-      dispatch(setAuthenticated(true));
-    }
-
-    if (error) {
-      dispatch(setAuthenticated(false));
-      localStorage.removeItem("user");
-    }
-  }, [data, dispatch, error]);
 
   return (
     <BrowserRouter>

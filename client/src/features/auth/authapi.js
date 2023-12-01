@@ -24,13 +24,6 @@ export const authapi = createApi({
         body: credentials,
       }),
     }),
-    profile: builder.mutation({
-      query: (credentials) => ({
-        url: "/profile",
-        method: "GET",
-        body: credentials,
-      }),
-    }),
     logout: builder.mutation({
       query: () => ({
         url: "/logout",
@@ -52,5 +45,4 @@ export const {
   useLogoutMutation,
   useEmailVerificationQuery,
   useCheckAuthStatusQuery,
-  useProfileMutation,
 } = authapi;

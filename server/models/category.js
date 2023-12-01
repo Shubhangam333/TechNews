@@ -17,15 +17,14 @@ const CategorySchema = new mongoose.Schema({
       name: {
         type: String,
         maxLength: [20, "Name cannot exceed 20 characters"],
-        required: true,
+        default: "",
       },
       info: {
         type: String,
-        required: true,
+        default: "",
       },
     },
   ],
-  tags: [{ type: mongoose.Schema.ObjectId, ref: "tag" }],
 });
 
 export const Category = new mongoose.model("category", CategorySchema);
