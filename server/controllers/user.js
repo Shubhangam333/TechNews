@@ -1,6 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import { User } from "../models/user.js";
 import { BadRequestError } from "../errors/customErrors.js";
+import { v2 as cloudinary } from "cloudinary";
 
 export const profile = async (req, res, next) => {
   const user = await User.findOne(req.user._id);
@@ -19,9 +20,21 @@ export const updateProfile = async (req, res, next) => {
   };
 
   if (req.file) {
+    const user = await User.findById(req.user.id);
+
+    const imageId = user.avatar.public_id;
+
+    await cloudinary.uploader.destroy(imageId);
+
+    const myCloud = await cloudinary.uploader.upload(req.file.path, {
+      folder: "technews_avatar",
+      width: 150,
+      crop: "scale",
+    });
+
     newData.avatar = {
-      public_id: req.file.filename,
-      url: req.file.path,
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
     };
   }
 
@@ -33,5 +46,5 @@ export const updateProfile = async (req, res, next) => {
     throw new BadRequestError("Something went wrong");
   }
 
-  req.status(StatusCodes.OK).json({ user });
+  res.status(StatusCodes.OK).json({ user });
 };

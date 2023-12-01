@@ -33,23 +33,12 @@ const Profile = () => {
             </div>
           </div>
           <div className="about-info">
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Distinctio nobis necessitatibus sint, magni laborum vero, commodi
-              nemo, quia harum mollitia ipsa minus neque modi! Atque voluptates
-              expedita fugiat, nobis impedit quae nulla et neque esse libero
-              ipsam porro, aperiam ratione minima dignissimos laudantium
-              mollitia enim magnam blanditiis dolor omnis officiis sequi placeat
-              nostrum. Odit ea nam dolorem! Ipsum dignissimos doloribus,
-              deleniti distinctio quas eaque harum vitae, nesciunt dicta a ipsa
-              neque nulla, nobis illum optio rerum! Similique vitae iusto
-              magnam.
-            </p>
+            <p>{user.bio}</p>
           </div>
         </section>
         <article className="aside-article">
           <div className="profile-image-container">
-            <img src="profile.webp" alt="" />
+            <img src={user.avatar.url} alt="" />
           </div>
           <div className="followers-info">
             <p>

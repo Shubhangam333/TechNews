@@ -16,7 +16,9 @@ router.route("/signup").post(upload.single("avatar"), signup);
 router.route("/verify/:token").get(verifyToken);
 router.route("/signin").post(login);
 router.route("/profile").get(isAuthenticated, profile);
-router.route("/profile/:id").get(isAuthenticated, updateProfile);
+router
+  .route("/profile/:id")
+  .put(isAuthenticated, upload.single("avatar"), updateProfile);
 router.route("/logout").get(isAuthenticated, logout);
 router.route("/check-status").get(isAuthenticated, checkStatus);
 

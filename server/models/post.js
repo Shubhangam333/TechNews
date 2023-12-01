@@ -36,11 +36,9 @@ const PostSchema = new mongoose.Schema({
       user: {
         type: mongoose.Schema.ObjectId,
         ref: "user",
-        required: true,
       },
       rating: {
         type: Number,
-        required: true,
       },
       createdAt: {
         type: Date,

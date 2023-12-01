@@ -1,16 +1,20 @@
 import { toast } from "react-toastify";
 import Wrapper from "../../assets/wrappers/EditProfileModal";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setProfileModal } from "../../features/profile/profileSlice";
+import { useUpdateProfileMutation } from "../../features/profile/profileapi";
+import Loader from "../Loader/Loader";
 
 const EditProfileModal = () => {
+  const { user } = useSelector((state) => state.auth);
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  const [gender, setGender] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [bio, setBio] = useState(user.bio);
+
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
 
   const handleImage = (e) => {
     const selectedFile = e.target.files[0];
@@ -26,9 +30,6 @@ const EditProfileModal = () => {
 
       reader.readAsDataURL(selectedFile);
     }
-
-    console.log("image", image);
-    console.log("imagePreview", imagePreview);
   };
 
   const handleSubmit = async (e) => {
@@ -38,33 +39,32 @@ const EditProfileModal = () => {
 
     formData.append("name", name);
     formData.append("email", email);
-    formData.append("password", password);
-    formData.append("gender", gender);
-    formData.append("avatar", image);
+    formData.append("bio", bio);
+    if (image) {
+      formData.append("avatar", image);
+    }
 
     try {
-      const res = console.log(res);
+      const res = await updateProfile({ formData, id: user._id }).unwrap();
+      console.log("res", res);
 
       if (res) {
         setName("");
         setEmail("");
-        setPassword("");
-        setGender("");
+        setBio("");
         setImage("");
         setImagePreview("");
-
-        toast.success(res.msg);
+        dispatch(setProfileModal(false));
+        toast.success("Profile Updated Successsfully");
       }
     } catch (error) {
-      toast.error(error.msg);
+      toast.error(error.data.msg);
       console.log(error);
     }
   };
 
   const postmodalRef = useRef(null);
   const dispatch = useDispatch();
-
-  console.log(postmodalRef);
 
   const handleCloseModal = useCallback(
     (e) => {
@@ -85,6 +85,7 @@ const EditProfileModal = () => {
 
   return (
     <div className="modal-overlay">
+      {isLoading && <Loader />}
       <Wrapper>
         <div className="auth-container" ref={postmodalRef}>
           <h1>Edit Profile</h1>
@@ -111,44 +112,14 @@ const EditProfileModal = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="radio-input-container">
-              <div>
-                <label htmlFor="male">Male:</label>
-                <input
-                  type="radio"
-                  name="gender"
-                  id="male"
-                  required="true"
-                  value="male"
-                  onChange={(e) => setGender(e.target.value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="female">Female: </label>
-                <input
-                  type="radio"
-                  name="gender"
-                  id="female"
-                  required="true"
-                  value="female"
-                  onChange={(e) => setGender(e.target.value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="other">Other: </label>
-                <input
-                  type="radio"
-                  name="gender"
-                  id="other"
-                  required="true"
-                  value="other"
-                  onChange={(e) => setGender(e.target.value)}
-                />
-              </div>
-            </div>
             <div className="input-container">
               <label htmlFor="bio">Bio</label>
-              <textarea cols={3} rows={3} />
+              <textarea
+                cols={3}
+                rows={3}
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+              />
             </div>
             <div className="input-container">
               <label htmlFor="avatar">Avatar</label>

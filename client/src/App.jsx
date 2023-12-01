@@ -8,30 +8,29 @@ import { setAuthenticated, setUser } from "./features/auth/authSlice";
 import Error from "./pages/Error";
 import PrivateRoute from "./Routes/PrivateRoute";
 import ProfilePage from "./pages/ProfilePage";
-import { useProfileMutation } from "./features/profile/profileapi";
+import { useProfileQuery } from "./features/profile/profileapi";
+import CreatePostPage from "./pages/CreatePostPage";
 
 function App() {
-  const [getUserInfo] = useProfileMutation();
+  const { data, error, refetch } = useProfileQuery();
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const fetchInfo = async () => {
       if (isAuthenticated) {
-        try {
-          const res = await getUserInfo().unwrap();
-          if (res.user) {
-            dispatch(setUser(res.user));
-          }
-        } catch (error) {
-          console.log(error);
+        refetch();
+        if (data) {
+          dispatch(setUser(data.user));
+        }
+        if (error) {
           dispatch(setAuthenticated(false));
           localStorage.removeItem("user");
         }
       }
     };
     fetchInfo();
-  }, [isAuthenticated, dispatch, getUserInfo]);
+  }, [isAuthenticated, dispatch, data, error, refetch]);
 
   return (
     <BrowserRouter>
@@ -41,6 +40,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="" element={<PrivateRoute />}>
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/post/createPost" element={<CreatePostPage />} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>
