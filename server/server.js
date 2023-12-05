@@ -8,6 +8,7 @@ import errorMiddleware from "./middlewares/errorMiddleware.js";
 import userRoutes from "./routes/user.js";
 import categoryRoutes from "./routes/category.js";
 import tagRoutes from "./routes/tag.js";
+import postRoutes from "./routes/post.js";
 
 import morgan from "morgan";
 import cloudinary from "cloudinary";
@@ -43,6 +44,7 @@ if (process.env.NODE_ENV === "development") {
 app.use("/api/v1", userRoutes);
 app.use("/api/v1", categoryRoutes);
 app.use("/api/v1", tagRoutes);
+app.use("/api/v1", postRoutes);
 
 app.use(errorMiddleware);
 

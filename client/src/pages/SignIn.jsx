@@ -14,9 +14,10 @@ const SignIn = () => {
     }
   }, [isAuthenticated, navigate]);
   return (
-    <Layout>
+    <>
+      <Layout />
       <Login />
-    </Layout>
+    </>
   );
 };
 

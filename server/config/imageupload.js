@@ -27,7 +27,7 @@ const storage = multer.diskStorage({
   },
 });
 const imageFilter = function (req, file, cb) {
-  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+  if (!file.originalname.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
     return cb({ message: "Unsupported file format" }, false);
   }
   cb(null, true);

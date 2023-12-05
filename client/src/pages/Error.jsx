@@ -1,11 +1,7 @@
 import ErrorComponent from "../components/Error/ErrorComponent";
 
 const Error = () => {
-  return (
-    <div>
-      <ErrorComponent />
-    </div>
-  );
+  return <ErrorComponent />;
 };
 
 export default Error;

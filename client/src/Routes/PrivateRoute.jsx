@@ -8,9 +8,12 @@ const PrivateRoute = () => {
   return (
     <>
       {isAuthenticated ? (
-        <Layout>
-          <Outlet />{" "}
-        </Layout>
+        <>
+          <Layout />
+          <main className="main-container">
+            <Outlet />
+          </main>
+        </>
       ) : (
         navigate("/")
       )}

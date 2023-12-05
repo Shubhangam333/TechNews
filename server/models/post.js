@@ -4,9 +4,9 @@ const PostSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
-    maxLength: [50, "Title can not be more than 50 characters long"],
+    maxLength: [100, "Title can not be more than 100 characters long"],
   },
-  body: {
+  content: {
     type: String,
     required: true,
   },
@@ -50,10 +50,12 @@ const PostSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "category",
   },
-  tag: {
-    type: mongoose.Schema.ObjectId,
-    ref: "tag",
-  },
+  tags: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "tag",
+    },
+  ],
   topic: {
     type: String,
     required: true,

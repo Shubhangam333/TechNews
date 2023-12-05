@@ -1,9 +1,12 @@
-import TopStories from "./TopStories";
+import Main from "./Main";
 
+import { useGetAllPostQuery } from "../../features/post/postapi";
 const Home = () => {
+  const { data, isLoading } = useGetAllPostQuery();
+  console.log(data);
   return (
     <>
-      <TopStories />
+      <Main data={data} isLoading={isLoading} />
     </>
   );
 };

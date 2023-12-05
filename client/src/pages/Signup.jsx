@@ -14,9 +14,10 @@ const Signup = () => {
     }
   }, [isAuthenticated, navigate]);
   return (
-    <Layout>
+    <>
+      <Layout />
       <Register />
-    </Layout>
+    </>
   );
 };
 

@@ -22,9 +22,10 @@ export const createCategory = async (req, res, next) => {
   res.status(StatusCodes.CREATED).json({ category });
 };
 export const updateCategory = async (req, res, next) => {
+  const { name, about, editor } = req.body;
   const category = await Category.findByIdAndUpdate(
     { _id: req.params.id },
-    req.body,
+    { name, about, editor },
     { new: true }
   );
 
@@ -33,6 +34,23 @@ export const updateCategory = async (req, res, next) => {
   }
 
   res.status(StatusCodes.OK).json({ category });
+};
+export const updateCategoryTopics = async (req, res, next) => {
+  const { topics } = req.body;
+
+  const category = await Category.findById({ _id: req.params.id });
+
+  if (!category) {
+    throw new NotFoundError("Category does not exist");
+  }
+
+  const updatedCategory = await Category.findOneAndUpdate(
+    { _id: req.params.id },
+    { $push: { topics } },
+    { new: true }
+  );
+
+  res.status(StatusCodes.OK).json({ updatedCategory });
 };
 export const deleteCategory = async (req, res, next) => {
   const category = await Category.findByIdAndDelete(

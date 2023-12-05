@@ -1,12 +1,7 @@
 import CreatePost from "../components/Post/CreatePost";
-import Layout from "./Layout";
 
 const CreatePostPage = () => {
-  return (
-    <Layout>
-      <CreatePost />
-    </Layout>
-  );
+  return <CreatePost />;
 };
 
 export default CreatePostPage;

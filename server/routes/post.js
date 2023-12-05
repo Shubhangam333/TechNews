@@ -1,10 +1,13 @@
 import express from "express";
-import {} from "../controllers/auth.js";
-import { createPost } from "../controllers/post.js";
+import { createPost, getAllPosts } from "../controllers/post.js";
 import { isAuthenticated } from "../middlewares/authMiddleware.js";
+import { upload } from "../config/imageupload.js";
 
 const router = express.Router();
 
-router.route("/create-post").post(isAuthenticated, createPost);
+router
+  .route("/create-post")
+  .post(isAuthenticated, upload.array("postimages"), createPost);
+router.route("/posts").get(isAuthenticated, getAllPosts);
 
 export default router;
