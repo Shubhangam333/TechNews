@@ -5,7 +5,7 @@ const ErrorComponent = () => {
   const navigate = useNavigate();
   return (
     <Wrapper>
-      <img src="error.jpg" alt="" />
+      <img src="/error.jpg" alt="" />
       <button onClick={() => navigate("/")}>Go Back to HomePage</button>
     </Wrapper>
   );

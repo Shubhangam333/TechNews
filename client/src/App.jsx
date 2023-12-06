@@ -10,6 +10,7 @@ import PrivateRoute from "./Routes/PrivateRoute";
 import ProfilePage from "./pages/ProfilePage";
 import { useProfileQuery } from "./features/profile/profileapi";
 import CreatePostPage from "./pages/CreatePostPage";
+import PostDetailPage from "./pages/PostDetailPage";
 
 function App() {
   const { data, error, refetch } = useProfileQuery();
@@ -42,6 +43,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/post/createPost" element={<CreatePostPage />} />
         </Route>
+        <Route path="/:category/:title" element={<PostDetailPage />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

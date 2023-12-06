@@ -61,3 +61,22 @@ export const getAllPosts = async (req, res, next) => {
 
   res.status(StatusCodes.OK).json({ posts });
 };
+
+export const getPostByTitle = async (req, res, next) => {
+  const titlename = req.params.title.trim().toLowerCase().replace(/%20/g, " ");
+  console.log(titlename, req.params.category);
+  const post = await Post.findOne({
+    title: { $regex: new RegExp(titlename, "i") },
+  })
+    .populate({
+      path: "category",
+      match: { name: { $regex: new RegExp(req.params.category, "i") } },
+    })
+    .populate("publisher");
+
+  if (!post) {
+    throw new NotFoundError("No post exist");
+  }
+
+  res.status(StatusCodes.OK).json({ post });
+};
