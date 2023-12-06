@@ -7,9 +7,9 @@ const LargePost = ({ post }) => {
   const category = post.category.name.trim().toLowerCase().split(" ").join("-");
 
   const getFirstParagraph = (content) => {
-    const paragraphs = content.split("</p>");
+    const paragraphs = content.split(".");
     if (paragraphs.length > 1) {
-      return paragraphs[0] + "</p>"; // Include the closing </p> tag
+      return "<p>" + paragraphs[0] + "." + "</p>"; // Include the closing </p> tag
     } else {
       return content; // If there's only one paragraph, return the original content
     }

@@ -36,6 +36,13 @@ const Wrapper = styled.section`
     height: 100%;
     object-fit: cover;
   }
+  .main-content p {
+    font-size: 1.5rem;
+  }
+  .main-content a {
+    font-size: 1.5rem;
+    padding-bottom: 2rem;
+  }
 `;
 
 export default Wrapper;

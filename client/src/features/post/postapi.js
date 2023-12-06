@@ -32,8 +32,14 @@ export const postapi = createApi({
       providesTags: ["Posts"],
     }),
     getSinglePostByTitle: builder.query({
-      query: ({ category, titlename }) => ({
-        url: `/post/${category}/${titlename}`,
+      query: ({ titlename }) => ({
+        url: `/post/${titlename}`,
+        method: "GET",
+      }),
+    }),
+    getAllPostByCategory: builder.query({
+      query: ({ category }) => ({
+        url: `/posts/${category}`,
         method: "GET",
       }),
     }),
@@ -46,4 +52,5 @@ export const {
   useCreatePostMutation,
   useGetAllPostQuery,
   useGetSinglePostByTitleQuery,
+  useGetAllPostByCategoryQuery,
 } = postapi;

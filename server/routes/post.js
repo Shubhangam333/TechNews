@@ -3,6 +3,7 @@ import {
   createPost,
   getAllPosts,
   getPostByTitle,
+  getPostsByCategory,
 } from "../controllers/post.js";
 import { isAuthenticated } from "../middlewares/authMiddleware.js";
 import { upload } from "../config/imageupload.js";
@@ -13,6 +14,7 @@ router
   .route("/create-post")
   .post(isAuthenticated, upload.array("postimages"), createPost);
 router.route("/posts").get(getAllPosts);
-router.route("/post/:category/:title").get(getPostByTitle);
+router.route("/post/:title").get(getPostByTitle);
+router.route("/posts/:category").get(getPostsByCategory);
 
 export default router;

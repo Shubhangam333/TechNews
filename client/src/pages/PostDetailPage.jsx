@@ -6,13 +6,11 @@ import Layout from "./Layout";
 import Loader from "../components/Loader/Loader";
 
 const PostDetailPage = () => {
-  const { category, title } = useParams();
-  console.log("pa", category, title);
+  const { title } = useParams();
 
   const titlename = title.trim().toLowerCase().split("-").join(" ");
 
-  const { data, isLoading, error } = useGetSinglePostByTitleQuery({
-    category,
+  const { data, isLoading } = useGetSinglePostByTitleQuery({
     titlename,
   });
   return (

@@ -1,5 +1,6 @@
 import Wrapper from "../../assets/wrappers/PostDetail";
 import { format } from "date-fns";
+import LinkComponent from "../Links/LinkComponent";
 
 const PostDetail = ({ post }) => {
   console.log(post);
@@ -11,6 +12,7 @@ const PostDetail = ({ post }) => {
 
   return (
     <Wrapper>
+      <LinkComponent tags={post.tags[0].name} catname={post.category.name} />
       <div className="title">
         <h1>{post.title}</h1>
       </div>
@@ -24,7 +26,10 @@ const PostDetail = ({ post }) => {
       <div className="post-img-container">
         <img src={post.images[0].url} alt="" />
       </div>
-      <div dangerouslySetInnerHTML={{ __html: post.content }} />
+      <div
+        dangerouslySetInnerHTML={{ __html: post.content }}
+        className="main-content"
+      />
     </Wrapper>
   );
 };

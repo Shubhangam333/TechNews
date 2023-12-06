@@ -142,9 +142,6 @@ const Wrapper = styled.section`
   .container .post:nth-child(9) {
     border-bottom: none;
   }
-  .container .post:last-child {
-    margin-top: 16rem;
-  }
 `;
 
 export default Wrapper;
