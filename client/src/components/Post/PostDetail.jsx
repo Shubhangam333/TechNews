@@ -1,10 +1,9 @@
 import Wrapper from "../../assets/wrappers/PostDetail";
 import { format } from "date-fns";
 import LinkComponent from "../Links/LinkComponent";
+import Loader from "../Loader/Loader";
 
-const PostDetail = ({ post }) => {
-  console.log(post);
-
+const PostDetail = ({ post, isLoading }) => {
   const formattedCreatedAt = format(
     new Date(post.createdAt),
     "MMMM d, yyyy h:mmaaa"
@@ -12,6 +11,7 @@ const PostDetail = ({ post }) => {
 
   return (
     <Wrapper>
+      {isLoading && <Loader />}
       <LinkComponent tags={post.tags[0].name} catname={post.category.name} />
       <div className="title">
         <h1>{post.title}</h1>

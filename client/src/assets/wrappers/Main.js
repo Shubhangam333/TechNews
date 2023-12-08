@@ -13,8 +13,7 @@ const Wrapper = styled.section`
     flex-wrap: wrap;
     gap: 20px;
     height: 100%;
-    min-height: 1100px;
-    max-height: 1100px;
+    max-height: 1200px;
     width: 100%;
     max-width: 1250px;
     padding-bottom: 3rem;
@@ -25,6 +24,7 @@ const Wrapper = styled.section`
   }
   .container .post-first-col {
     width: 50%;
+    max-width: 650px;
   }
   .container .post-lg {
     display: flex;
@@ -52,8 +52,9 @@ const Wrapper = styled.section`
   }
 
   .container .post-med .med-post-image-container {
-    width: 50%;
-    height: 50%;
+    flex: 1;
+    width: 100%;
+    height: 150px;
   }
   .container .post-med .med-post-image-container img {
     width: 200px;
@@ -62,7 +63,7 @@ const Wrapper = styled.section`
   }
   .container .post-img-container {
     width: 100%;
-    height: 100%;
+    height: 500px;
   }
   .large-post-title-link {
     font-size: 2rem;
@@ -79,10 +80,16 @@ const Wrapper = styled.section`
 
   .post-small {
     width: 24%;
+    max-width: 300px;
   }
   img {
     width: 100%;
     height: 100%;
+  }
+  .post-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .container .post h1 {
     color: white;
@@ -111,6 +118,7 @@ const Wrapper = styled.section`
     font-weight: bold;
     letter-spacing: 1px;
     font-size: 0.8rem;
+    z-index: 2;
   }
   .post-tags .publisher {
     font-size: 0.7rem;
@@ -126,9 +134,13 @@ const Wrapper = styled.section`
   .post-right-container {
     margin-right: 1rem;
     width: 26%;
+    max-width: 300px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+  .post-right-container p {
+    max-width: 300px;
   }
   .post-right-container img {
     width: 90%;
@@ -138,6 +150,7 @@ const Wrapper = styled.section`
 
   .container .post:nth-child(3) {
     border-bottom: none;
+    margin-bottom: 3rem;
   }
   .container .post:nth-child(9) {
     border-bottom: none;

@@ -5,6 +5,7 @@ import { Post } from "../models/post.js";
 import { Tag } from "../models/tag.js";
 import mongoose from "mongoose";
 import { Category } from "../models/category.js";
+import { APIfeatures } from "../apifeatures/apiFeature.js";
 
 export const createPost = async (req, res, next) => {
   const { title, content, publisher, category, tags, topic } = req.body;
@@ -50,21 +51,27 @@ export const createPost = async (req, res, next) => {
 };
 
 export const getAllPosts = async (req, res, next) => {
-  const posts = await Post.find()
+  const features = new APIfeatures(Post.find(), req.query).paginating();
+
+  const posts = await features.query
+    .find()
     .populate("category")
     .populate("tags")
     .populate("publisher")
     .sort({ _id: -1 });
 
+  const postCount = await Post.countDocuments();
+
   if (!posts) {
     throw new NotFoundError();
   }
 
-  res.status(StatusCodes.OK).json({ posts });
+  res.status(StatusCodes.OK).json({ posts, postCount });
 };
 
 export const getPostByTitle = async (req, res, next) => {
-  const titlename = req.params.title.trim().toLowerCase().replace(/%20/g, " ");
+  const { titlename } = req.body;
+
   const post = await Post.findOne({
     title: { $regex: new RegExp(titlename, "i") },
   })

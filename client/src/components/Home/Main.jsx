@@ -6,18 +6,18 @@ import MediumPost from "./Posts/MediumPost";
 import PostRight from "./Posts/PostRight";
 import SmallPost from "./Posts/SmallPost";
 
-const Main = ({ data, isLoading }) => {
+const Main = ({ topPosts, isLoading }) => {
   return (
     <Wrapper>
       <div className="container">
         {isLoading && <Loader />}
-        {data &&
-          data?.posts?.map((post, index) => (
+        {topPosts &&
+          topPosts.map((post, index) => (
             <>
               {index == 0 && <LargePost post={post} />}
               {index > 0 && index <= 2 && <MediumPost post={post} />}
               {index > 2 && index < 9 && <SmallPost post={post} />}
-              {index > 9 && <PostRight post={post} />}
+              {index > 9 && index < 12 && <PostRight post={post} />}
             </>
           ))}
       </div>

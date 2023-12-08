@@ -38,6 +38,8 @@ const Wrapper = styled.section`
   }
   .main-content p {
     font-size: 1.5rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
   }
   .main-content a {
     font-size: 1.5rem;

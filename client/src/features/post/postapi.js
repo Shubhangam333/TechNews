@@ -25,16 +25,20 @@ export const postapi = createApi({
       invalidatesTags: ["Posts"],
     }),
     getAllPost: builder.query({
-      query: () => ({
-        url: "/posts",
+      query: ({ page, limit }) => ({
+        url: `/posts?page=${page}&limit=${limit}`,
         method: "GET",
       }),
       providesTags: ["Posts"],
     }),
-    getSinglePostByTitle: builder.query({
+    getSinglePostByTitle: builder.mutation({
       query: ({ titlename }) => ({
-        url: `/post/${titlename}`,
-        method: "GET",
+        url: "/post",
+        method: "POST",
+        body: JSON.stringify({ titlename }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }),
     }),
     getAllPostByCategory: builder.query({
@@ -51,6 +55,6 @@ export const {
   useGetAllCategoriesQuery,
   useCreatePostMutation,
   useGetAllPostQuery,
-  useGetSinglePostByTitleQuery,
+  useGetSinglePostByTitleMutation,
   useGetAllPostByCategoryQuery,
 } = postapi;

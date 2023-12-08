@@ -14,7 +14,7 @@ router
   .route("/create-post")
   .post(isAuthenticated, upload.array("postimages"), createPost);
 router.route("/posts").get(getAllPosts);
-router.route("/post/:title").get(getPostByTitle);
+router.route("/post").post(getPostByTitle);
 router.route("/posts/:category").get(getPostsByCategory);
 
 export default router;
