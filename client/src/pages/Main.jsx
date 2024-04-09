@@ -3,9 +3,12 @@ import Layout from "./Layout";
 
 const Main = () => {
   return (
-    <Layout>
-      <Home />
-    </Layout>
+    <>
+      <Layout />
+      <main className="main-container">
+        <Home />
+      </main>
+    </>
   );
 };
 

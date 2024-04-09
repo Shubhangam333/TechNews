@@ -44,7 +44,7 @@ i {
   --image-icon-color: #0095d9;
   --image-overlay-color: hsla(0, 0%, 100%, 0.9);
   --image-reverse-display: block;
-  --label-color: #0095d9;
+  --label-color: #00608c;
   --link-color: #0095d9;
   --link-underline-color: rgba(0, 149, 217, 0.5);
   --link-underline-hover-color: #0095d9;
@@ -60,4 +60,78 @@ i {
 
 .layout {
   margin-top: 5.5rem;
+}
+.main-container {
+  margin: 5.5rem 0rem 0rem 0rem;
+  min-height: 100vh;
+}
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: transparent;
+  border-radius: 50%;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--icon-color);
+  height: 20px;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: white;
+}
+.editor {
+  box-shadow: 0px 0px 20px 0px rgba(76, 87, 125, 0.02);
+  background: #fff;
+  padding: 20px 30px;
+  width: 60%;
+  margin: 50px auto;
+}
+
+.search-res-post {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: black;
+  border-bottom: 2px solid var(--aside-divider-color);
+  color: white;
+}
+
+.search-res-post img {
+  width: 400px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.search-res-post .info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 400px;
+}
+
+.search-res-post .publisher {
+  color: gray;
+  font-size: 0.7rem;
+}
+.search-res-container {
+  position: fixed;
+  top: 12rem;
+  left: 0;
+  right: 0;
+  margin: 0rem 1rem;
+  max-height: 300px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
 }

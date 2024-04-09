@@ -73,7 +73,7 @@ const Wrapper = styled.nav`
   .btn-list .auth-container .icon-container {
     background-color: var(--title-color);
     width: 2rem;
-    height: 1.8rem;
+    height: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,6 +112,11 @@ const Wrapper = styled.nav`
     justify-content: center;
   }
 
+  .btn-list .icon-container .auth-btn.logout {
+    padding: 0.3rem;
+    border: 0.2rem;
+  }
+
   .btn-list .icon-container:hover {
     background: red;
   }
@@ -123,6 +128,25 @@ const Wrapper = styled.nav`
     font-size: 1.2rem;
     background: none;
     color: var(--icon-color);
+  }
+
+  .profile-section {
+    background-color: var(--aside-background-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    padding: 0.33rem 0.8rem;
+    gap: 0.4rem;
+    font-size: 1rem;
+  }
+
+  .profile-section:hover {
+    background: var(--link-color);
+  }
+  .profile-section img {
+    width: 1.2rem;
+    height: 1.2rem;
   }
 
   @media (max-width: 980px) {

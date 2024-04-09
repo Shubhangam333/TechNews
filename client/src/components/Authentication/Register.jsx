@@ -48,19 +48,19 @@ const Register = () => {
       console.log(res);
 
       if (res) {
-        setName("");
-        setEmail("");
-        setPassword("");
-        setGender("");
-        setImage("");
-        setImagePreview("");
-
         toast.success(res.msg);
       }
     } catch (error) {
-      toast.error(error.msg);
+      toast.error(error.data.msg);
       console.log(error);
     }
+
+    setName("");
+    setEmail("");
+    setPassword("");
+    setGender("");
+    setImage("");
+    setImagePreview("");
   };
 
   return (

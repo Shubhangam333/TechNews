@@ -8,6 +8,7 @@ import { generateVerificationToken } from "../utils/verificationToken.js";
 import { sendVerificationEmail } from "../middlewares/verificationEmail.js";
 import { StatusCodes } from "http-status-codes";
 import { sendToken } from "../utils/sendToken.js";
+import { v2 as cloudinary } from "cloudinary";
 
 export const signup = async (req, res, next) => {
   const { name, email, password, gender } = req.body;
@@ -16,13 +17,22 @@ export const signup = async (req, res, next) => {
     throw new Error("Insufficient Information error");
   }
 
-  if (!req.file) {
-    throw new Error("profile picture is required");
-  }
-
   if (await User.findOne({ email })) {
     throw new UnauthorizedError("Email Already Exist");
   }
+
+  if (!req.file) {
+    throw new BadRequestError("Profile Picture is required");
+  }
+  const data = {
+    avatar: req.file.path,
+  };
+
+  const myCloud = await cloudinary.uploader.upload(data.avatar, {
+    folder: "technews_avatar",
+    width: 150,
+    crop: "scale",
+  });
 
   const verificationToken = generateVerificationToken();
 
@@ -33,8 +43,8 @@ export const signup = async (req, res, next) => {
     gender,
     verificationToken,
     avatar: {
-      public_id: req.file.filename,
-      url: req.file.path,
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
     },
   });
 
@@ -89,6 +99,16 @@ export const login = async (req, res, next) => {
   }
 
   sendToken(user, res);
+};
+
+export const logout = async (req, res, next) => {
+  const options = {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  };
+  res.status(StatusCodes.OK).cookie("token", null, options).json({
+    msg: "Logged out successfully",
+  });
 };
 
 export const checkStatus = async (req, res, next) => {
