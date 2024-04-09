@@ -66,4 +66,16 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
+PostSchema.statics.search = async function (keyword) {
+  return this.find({
+    $or: [
+      { title: { $regex: keyword, $options: "i" } },
+      { content: { $regex: keyword, $options: "i" } },
+      { topic: { $regex: keyword, $options: "i" } },
+    ],
+  })
+    .populate("publisher", "name")
+    .populate("category");
+};
+
 export const Post = new mongoose.model("post", PostSchema);

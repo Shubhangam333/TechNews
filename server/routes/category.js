@@ -15,7 +15,7 @@ router.route("/create-category").post(isAuthenticated, createCategory);
 router.route("/category/:id").put(isAuthenticated, updateCategory);
 router.route("/category/topics/:id").put(isAuthenticated, updateCategoryTopics);
 router.route("/category/:id").delete(isAuthenticated, deleteCategory);
-router.route("/getAllCategories").get(isAuthenticated, getAllCategories);
+router.route("/getAllCategories").get(getAllCategories);
 router.route("/category/:id").get(isAuthenticated, getCategoryById);
 
 export default router;

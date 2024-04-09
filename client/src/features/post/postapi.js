@@ -47,6 +47,12 @@ export const postapi = createApi({
         method: "GET",
       }),
     }),
+    searchPostByKeyword: builder.mutation({
+      query: (keyword) => ({
+        url: `/posts/search/${keyword}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -57,4 +63,5 @@ export const {
   useGetAllPostQuery,
   useGetSinglePostByTitleMutation,
   useGetAllPostByCategoryQuery,
+  useSearchPostByKeywordMutation,
 } = postapi;

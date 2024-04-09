@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useGetAllPostByCategoryQuery } from "../../features/post/postapi";
 import Main from "../Home/Main";
-import Test from "../Home/Test";
 import { useEffect, useState } from "react";
 import RecentNews from "../Home/Recent/RecentNews";
 
@@ -19,7 +18,6 @@ const Category = () => {
       setRecentPosts([...recentPosts]);
     }
   }, [data]);
-  console.log("rp", recentPosts);
 
   return (
     <>

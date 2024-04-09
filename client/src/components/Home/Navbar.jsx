@@ -7,15 +7,17 @@ import {
   setMegaMenuActive,
   setSearchActive,
 } from "../../features/navbar/navbarSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../../features/auth/authapi";
 import { setlogout } from "../../features/auth/authSlice";
+import { useGetAllCategoriesQuery } from "../../features/post/postapi";
 
 const Navbar = () => {
   const { megaMenuActive } = useSelector((state) => state.navbar);
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const [logoutUser] = useLogoutMutation();
   const dispatch = useDispatch();
+  const { data } = useGetAllCategoriesQuery();
 
   const handleActive = () => {
     dispatch(setMegaMenuActive());
@@ -45,9 +47,13 @@ const Navbar = () => {
         </h1>
       </div>
       <ul className="navLinks">
-        <li className="navItem">
-          <a href="#">Computing</a>
-        </li>
+        {data &&
+          data.map((d) => (
+            <li className="navItem" key={d._id}>
+              <Link to={`/${d.name}`}>{d.name}</Link>
+            </li>
+          ))}
+        {/* 
         <li className="navItem">
           <a href="#">Mobile</a>
         </li>
@@ -59,7 +65,7 @@ const Navbar = () => {
         </li>
         <li className="navItem">
           <a href="#"> Audio / Video</a>
-        </li>
+        </li> */}
       </ul>
       <div className="btn-list">
         {/* <button className="icon-container auth-btn google-auth">

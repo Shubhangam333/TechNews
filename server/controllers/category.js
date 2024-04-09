@@ -72,7 +72,7 @@ export const getAllCategories = async (req, res, next) => {
     throw new NotFoundError("No Categories Found");
   }
 
-  res.status(StatusCodes.OK).json({ categories });
+  res.status(StatusCodes.OK).json(categories);
 };
 export const getCategoryById = async (req, res, next) => {
   const category = await Category.findById({ _id: req.params.id });

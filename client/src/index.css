@@ -95,3 +95,43 @@ i {
   width: 60%;
   margin: 50px auto;
 }
+
+.search-res-post {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: black;
+  border-bottom: 2px solid var(--aside-divider-color);
+  color: white;
+}
+
+.search-res-post img {
+  width: 400px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.search-res-post .info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 400px;
+}
+
+.search-res-post .publisher {
+  color: gray;
+  font-size: 0.7rem;
+}
+.search-res-container {
+  position: fixed;
+  top: 12rem;
+  left: 0;
+  right: 0;
+  margin: 0rem 1rem;
+  max-height: 300px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}

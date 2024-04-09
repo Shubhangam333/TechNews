@@ -102,3 +102,13 @@ export const getPostsByCategory = async (req, res, next) => {
 
   res.status(StatusCodes.OK).json({ posts });
 };
+
+export const getPostsByKeyword = async (req, res, next) => {
+  const keyword = req.params.keyword;
+  const posts = await Post.search(keyword);
+
+  if (!posts) {
+    throw new NotFoundError("No post exist");
+  }
+  res.status(StatusCodes.OK).json({ posts });
+};
